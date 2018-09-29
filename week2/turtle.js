@@ -1,49 +1,65 @@
 
-// create Turtle class
+// Welcome to Harry's incredible journey! 
+
+// Send Harry across the magical lands of Vanderleer! 
+// Below the Turtle Class, please make your own coordinates to move Harry... 
+// e.g. forward(5) --> move Harry 5 units forward
+// e.g. left() --> turn Harry left.
+
+// Enjoy! 
+
+
+console.log("==========================================================")
+console.log("Printing Harry's journey!");
+console.log("==========================================================")
+
+
+// Create Turtle class
+//functoins: 
+// - forward()              = move Harry forward
+// - right()                = turn Harry right
+// - left()                 = turn Harry left
+// - getMaxCoordinate()     = determine largest coordinate number
+// - print()                = print Harry's journey
+// - allPoints()            = list the coordinates in an array
+
 class Turtle {
     constructor(posX, posY) {
         this.posX = posX;
         this.posY = posY;
+        //set direction default to EAST
         this.direction = "east";
-        this.turtleArr = [];
-        console.log("================== BEGIN LOG")
-    
-
-        this.turtleArr[0] = [this.posX, this.posY];
-        console.log("THIS IS TURTLE ARRAY START " + this.turtleArr);
+        //array holding all the turtle coordinates
+        this.turtleCoordinates = [];
+        //populate array with 2D
+        this.turtleCoordinates[0] = [this.posX, this.posY];
+        console.log(`Harry's starting off @ position X = ${this.posX} and position Y = ${this.posY} `);
     }
-
+    //forward fn, takes number to tell it how many steps to take
     forward(n) {
-        console.log("===---------")
-        console.log(" current direction " + this.direction);
 
+        // push each step into turtleCoord array, using for loop,
+        // forward direction depends on direction - so check direction first.
         for (let i = 1; i <= n; i++) {
             if (this.direction === "east") {
                 this.posX = this.posX + 1;
-                this.turtleArr.push([this.posX, this.posY]);
+                this.turtleCoordinates.push([this.posX, this.posY]);
             } else if (this.direction === "west") {
                 this.posX = this.posX - 1;
-                this.turtleArr.push([this.posX, this.posY]);
+                this.turtleCoordinates.push([this.posX, this.posY]);
             } else if (this.direction === "south") {
                 this.posY = this.posY + 1;
-                this.turtleArr.push([this.posX, this.posY]);
+                this.turtleCoordinates.push([this.posX, this.posY]);
             } else if (this.direction === "north") {
                 this.posY = this.posY - 1;
-                this.turtleArr.push([this.posX, this.posY]);
+                this.turtleCoordinates.push([this.posX, this.posY]);
             }
-
         }
-
-        console.log("should move forward by " + n + " so X is now " + this.posX);
-        console.log("should move forward by " + n + " so Y is now " + this.posY);
-
-        //this.turtleArr[1] = [this.posX, this.posY];
-        console.log("THIS IS TURTLE ARRAY after FORWARD " + this.turtleArr);
-
         return this;
-    }
-    right() {
+    }// end of forward
 
+    // function to turn right - ie switch direction
+    right() {
         if (this.direction === "east") {
             this.direction = "south"
         } else if (this.direction === "south") {
@@ -56,6 +72,7 @@ class Turtle {
         return this;
     }//end of right()
 
+    // function to turn left - ie switch direction
     left() {
 
         if (this.direction === "east") {
@@ -71,16 +88,10 @@ class Turtle {
 
     }//end of left()
 
-    allPoints() {
+    // create function to find the maximum value a coordinate will be. We will use this val to determine the size of the grid
+    getMaxCoordinate() {
 
-        console.log(this.turtleArr);
-    }
-
-
-    getMax() { 
-
-        let turtleCoords = this.turtleArr;
-
+        let turtleCoords = this.turtleCoordinates;
         //find the largest coordinate number turtle -- so we know how big to make map
         function largestCoordinate(arr) {
             let largest = 0,
@@ -97,103 +108,57 @@ class Turtle {
             return largestNum;
         }
         let biggestNumber = largestCoordinate(turtleCoords);
-       
-
-       let bigNum = Math.max(...biggestNumber);
+        let bigNum = Math.max(...biggestNumber);
         //set the table size
-       
-      return bigNum 
+
+        return bigNum
     }
 
-
-print() {
-
-        let bigNum = this.getMax(); 
-        
-        console.log("this is biggest number: " + bigNum)
+    //function to print coordinates and route
+    print() {
+        let bigNum = this.getMaxCoordinate();
         let row = bigNum;
-        let col = bigNum;    
-    // mapping coordinates
-    let grid = "";
-        for (let y = 0; y <= col; y++) {
-            for (let x = 0; x <= row; x++) {
-              let result = "□";
-                //console.log("this was x and y : " + x + " and " + y)
-                //if posX and Y = the coordinate, print the current position of X,Y
-                for (let z = 0; z < this.turtleArr.length; z++) {
-            
-                    if (x === this.turtleArr[z][0] && y === this.turtleArr[z][1]) {
+        let col = bigNum;
+       
+        // mapping coordinates
+        let grid = "";
+        for (let indexY = 0; indexY <= col; indexY++) {
+            for (let indexX = 0; indexX <= row; indexX++) {
+                let result = "□";
+                //console.log("this was indexX and indeindexXY : " + indexX + " and " + indeindexXY)
+                //if indX and ind Y = the coordinate, print the current position of indexX,indxY
+                for (let z = 0; z < this.turtleCoordinates.length; z++) {
+                    //print out the places it matched.
+                    // console.log("this was our hit: " + this.turtleCoordinates[z][0] + " and " + this.turtleCoordinates[z][1]);
+                    if (indexX === this.turtleCoordinates[z][0] && indexY === this.turtleCoordinates[z][1]) {
                         result = "■";
-        
-                        console.log("this was our hit: " + this.turtleArr[z][0] + " and " + this.turtleArr[z][1]);
                     }
-            
-                    
                 }   // 3rd nested loop
                 grid = grid + result;
             } // after row
             grid = grid + "\n";
         }// after col
         console.log(grid);
+        console.log(`Harry's ending @ position X = ${this.posX} and position Y = ${this.posY} `);
     }
 
-    
-    // print() {
+    // function to print out all the coordinates turtle has been
+    allPoints() {
 
-    //     let bigNum = this.getMax(); 
-        
-    //     console.log("this is biggest number: " + bigNum)
-    //     let row = bigNum;
-    //     let col = bigNum;    
-    // // mapping coordinates
-    // let star = "";
-    //     for (let y = 0; y <= col; y++) {
-    //         for (let x = 0; x <= row; x++) {
-        
-    //             //console.log("this was x and y : " + x + " and " + y)
-    //             //if posX and Y = the coordinate, print the current position of X,Y
-    //             for (let z = 0; z <= 10; z++) {
-            
-    //                 if (x === this.turtleArr[z][0] && y === this.turtleArr[z][1]) {
-    //                     star = star + "■";
-        
-    //                     console.log("this was our hit: " + this.turtleArr[x][0] + " and " + this.turtleArr[y][1])
-    //                 }
-    //                 else {
-    //                     star = star + "□";
-    //                 }
-                    
-    //             }   // 3rd nested loop
-    //         }
-    //         star = star + "\n";
-    //     }
-    //     console.log(star);
-    // }
+        console.log(this.turtleCoordinates);
+    }
+
+
 } // end of Turtle Class 
 
+//declare turtle, Harry
+let harry = new Turtle(3, 3);
 
-let harry = new Turtle(0, 0);
+// move Harry using example command
+harry.forward(3).right().forward(3).forward(2).forward(3).left().forward(4).right().forward(6).left().forward(4).left().forward(3).left().forward(4).left().forward(3);
 
-
-//harry.forward(3).right().forward(3).forward(2);
-harry.forward(3).right().forward(3).forward(2).forward(3).left().forward(4).right().forward(6).left().forward(4);
-
-
-harry.allPoints();
+//print out all of Harry's points
 harry.print();
 
-let franklin = new Turtle(1, 1);
-
-
-
-
-
-
-
-
-
-
-// 1,1    1,2     1,3,     1,4      1,5
-// 2,1    2,2     2,3,     2,4      2,5
-//
-//
+// used to print out all the points 
+// harry.allPoints();
