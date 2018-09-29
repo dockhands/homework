@@ -6,8 +6,16 @@ class Turtle {
         this.posY = posY;
         this.direction = "east";
         this.turtleArr = [];
-        console.log("================== BEGIN LOG")
-    
+        console.log("==================")
+        console.log("posX in constructor " + posX);
+        console.log("posY in constructor " + posY);
+
+
+        // //let coordinates = [];
+        // coordinates[0] = this.posX;
+        // coordinates[1] = this.posY;
+        // turtleArr[0] = coordinates; 
+        // console.log("THIS IS TURTLE ARRAY START " + turtleArr);
 
         this.turtleArr[0] = [this.posX, this.posY];
         console.log("THIS IS TURTLE ARRAY START " + this.turtleArr);

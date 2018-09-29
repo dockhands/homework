@@ -6,8 +6,16 @@ class Turtle {
         this.posY = posY;
         this.direction = "east";
         this.turtleArr = [];
-        console.log("================== BEGIN LOG")
-    
+        console.log("==================")
+        console.log("posX in constructor " + posX);
+        console.log("posY in constructor " + posY);
+
+
+        // //let coordinates = [];
+        // coordinates[0] = this.posX;
+        // coordinates[1] = this.posY;
+        // turtleArr[0] = coordinates; 
+        // console.log("THIS IS TURTLE ARRAY START " + turtleArr);
 
         this.turtleArr[0] = [this.posX, this.posY];
         console.log("THIS IS TURTLE ARRAY START " + this.turtleArr);
@@ -105,8 +113,7 @@ class Turtle {
       return bigNum 
     }
 
-
-print() {
+    print() {
 
         let bigNum = this.getMax(); 
         
@@ -114,61 +121,29 @@ print() {
         let row = bigNum;
         let col = bigNum;    
     // mapping coordinates
-    let grid = "";
+    let star = "";
         for (let y = 0; y <= col; y++) {
             for (let x = 0; x <= row; x++) {
-              let result = "□";
+        
                 //console.log("this was x and y : " + x + " and " + y)
                 //if posX and Y = the coordinate, print the current position of X,Y
-                for (let z = 0; z < this.turtleArr.length; z++) {
+                for (let z = 0; z <= 8; z++) {
             
                     if (x === this.turtleArr[z][0] && y === this.turtleArr[z][1]) {
-                        result = "■";
+                        star = star + "■";
         
-                        console.log("this was our hit: " + this.turtleArr[z][0] + " and " + this.turtleArr[z][1]);
+                        console.log("this was our hit: " + this.turtleArr[x][0] + " and " + this.turtleArr[y][1])
                     }
-            
-                    
+                    else {
+                        star = star + "□";
+                    }
+        
                 }   // 3rd nested loop
-                grid = grid + result;
-            } // after row
-            grid = grid + "\n";
-        }// after col
-        console.log(grid);
+            }
+            star = star + "\n";
+        }
+        console.log(star);
     }
-
-    
-    // print() {
-
-    //     let bigNum = this.getMax(); 
-        
-    //     console.log("this is biggest number: " + bigNum)
-    //     let row = bigNum;
-    //     let col = bigNum;    
-    // // mapping coordinates
-    // let star = "";
-    //     for (let y = 0; y <= col; y++) {
-    //         for (let x = 0; x <= row; x++) {
-        
-    //             //console.log("this was x and y : " + x + " and " + y)
-    //             //if posX and Y = the coordinate, print the current position of X,Y
-    //             for (let z = 0; z <= 10; z++) {
-            
-    //                 if (x === this.turtleArr[z][0] && y === this.turtleArr[z][1]) {
-    //                     star = star + "■";
-        
-    //                     console.log("this was our hit: " + this.turtleArr[x][0] + " and " + this.turtleArr[y][1])
-    //                 }
-    //                 else {
-    //                     star = star + "□";
-    //                 }
-                    
-    //             }   // 3rd nested loop
-    //         }
-    //         star = star + "\n";
-    //     }
-    //     console.log(star);
-    // }
 } // end of Turtle Class 
 
 
@@ -176,7 +151,7 @@ let harry = new Turtle(0, 0);
 
 
 //harry.forward(3).right().forward(3).forward(2);
-harry.forward(3).right().forward(3).forward(2).forward(3).left().forward(4).right().forward(6).left().forward(4);
+harry.forward(3).right().forward(3).forward(2).forward(3);
 
 
 harry.allPoints();
