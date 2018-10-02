@@ -35,6 +35,10 @@ todoInterface.question(introMessage, (answer) => {
       let dNumber = parseInt(answer[1]);
       console.log("This is the dX item number:", dNumber);
       toDelete(dNumber);
+      break;
+
+      case answer == "q":
+      quit();
   
     }
 
@@ -64,5 +68,11 @@ const toDelete = function (itemDeleted) {
   console.log(`Deleted item: "${toDoList[itemDeleted - 1][1]}"`);
   toDoList[itemDeleted - 1].splice(itemDeleted - 1, 1);
   console.log(`New array is "${toDoList}"`);
+};
+
+const quit = function () {
+ 
+  console.log("See you soon! 👀");
+  todoInterface.close();
 };
 
