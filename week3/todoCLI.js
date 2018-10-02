@@ -6,14 +6,19 @@ const todoInterface = readline.createInterface({
 });
 
 // Example messages 
+let introMessage = "Welcome to ToDo CLI! \n   -------------------- \n";
 
-let introMessage =
-  "Welcome to ToDo CLI! \n   -------------------- \n (v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n ";
+console.log(introMessage);
+
+let options =
+  "(v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n ";
 
 let toDoList = [["[ ]", "Take out the trash"], ["[ ]", "Buy toothpaste"], ["[ ]", "Buy Snickerdoodles"], ["[ ]", "Find a cure for aging"]];
 
 
-todoInterface.question(introMessage, (answer) => {
+
+const mainMenu = (q) => { 
+todoInterface.question(options, (answer) => {
   // TODO: Log the answer in a database
 
   switch (true) {
@@ -43,18 +48,23 @@ todoInterface.question(introMessage, (answer) => {
     }
 
 });
+}
 
+mainMenu(options);
 // functions 
 
-const view = function (itemToAdd) {
-  toDoList.push("[ ] " + itemToAdd);
+const view = function () {
   console.log(toDoList);
+  console.log();
+  mainMenu(options);
 };
 
 const add = function () {
   todoInterface.question("What do you want to add to the list? ", (toAdd) => {
     console.log(toAdd);
-    view(toAdd);
+    //view(toAdd);
+    toDoList.push(["[ ]", toAdd]);
+    mainMenu(options);
   });
 };
 
@@ -62,17 +72,19 @@ const complete = function (itemCompleted) {
   //update the box of index number's first index inside double array
   toDoList[itemCompleted - 1][0] = "[✓]";
   console.log(`Completed item: "${toDoList[itemCompleted - 1][1]}"`);
+  mainMenu(options);
 };
 
 const toDelete = function (itemDeleted) {
   console.log(`Deleted item: "${toDoList[itemDeleted - 1][1]}"`);
   toDoList[itemDeleted - 1].splice(itemDeleted - 1, 1);
-  console.log(`New array is "${toDoList}"`);
+  mainMenu(options);
 };
 
 const quit = function () {
  
   console.log("See you soon! 👀");
   todoInterface.close();
+  mainMenu(options);
 };
 
