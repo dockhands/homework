@@ -7,61 +7,62 @@ const todoInterface = readline.createInterface({
 
 // Example messages 
 
-let introMessage = 
-"Welcome to ToDo CLI! \n   -------------------- \n (v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n ";
+let introMessage =
+  "Welcome to ToDo CLI! \n   -------------------- \n (v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n ";
 
-let toDoList = [["[ ]","Take out the trash"], ["[ ]","Buy toothpaste"],["[ ]","Buy Snickerdoodles"],["[ ]","Find a cure for aging"]];
+let toDoList = [["[ ]", "Take out the trash"], ["[ ]", "Buy toothpaste"], ["[ ]", "Buy Snickerdoodles"], ["[ ]", "Find a cure for aging"]];
+
 
 todoInterface.question(introMessage, (answer) => {
   // TODO: Log the answer in a database
 
-  if (answer == "v"){
-   view();
-  }
-
-  if (answer == "n"){
-    add();
-   }
-
-   if (answer[0] == "c"){
+  switch (true) {
+    case answer == "v":
+      view();
+      break;
     
-    let itemNumber = parseInt(answer[1]);
-    console.log("This is the cX item number:", itemNumber);
-    complete(itemNumber);
-   }
+      case answer == "n": 
+      add();
+      break;
+      
+      case answer[0] == "c":
+      let cNumber = parseInt(answer[1]);
+      console.log("This is the cX item number:", cNumber);
+      complete(cNumber);
+      break;      
 
+      case answer[0] == "d":
+      let dNumber = parseInt(answer[1]);
+      console.log("This is the dX item number:", dNumber);
+      toDelete(dNumber);
+  
+    }
 
- // todoInterface.close();
 });
-
 
 // functions 
 
-let view = function (itemToAdd) { 
-
-  console.log(toDoList);
-  toDoList.push("[ ] " +  itemToAdd);
+const view = function (itemToAdd) {
+  toDoList.push("[ ] " + itemToAdd);
   console.log(toDoList);
 };
 
-let add = function () { 
-
-  todoInterface.question("What do you want to add to the list? ", (toAdd) => { 
-
+const add = function () {
+  todoInterface.question("What do you want to add to the list? ", (toAdd) => {
     console.log(toAdd);
     view(toAdd);
-
-  }); 
-
-}; 
-
-let complete = function (itemCompleted) { 
-
-  //console.log(toDoList[1][0]);
-  toDoList[itemCompleted-1][0] = "[✓]";
-  console.log(`Completed item: "${toDoList[itemCompleted-1][1]}"`);
-  //home(); 
+  });
 };
 
+const complete = function (itemCompleted) {
+  //update the box of index number's first index inside double array
+  toDoList[itemCompleted - 1][0] = "[✓]";
+  console.log(`Completed item: "${toDoList[itemCompleted - 1][1]}"`);
+};
 
+const toDelete = function (itemDeleted) {
+  console.log(`Deleted item: "${toDoList[itemDeleted - 1][1]}"`);
+  toDoList[itemDeleted - 1].splice(itemDeleted - 1, 1);
+  console.log(`New array is "${toDoList}"`);
+};
 
