@@ -6,14 +6,14 @@ const todoInterface = readline.createInterface({
 });
 
 // Example messages 
-let introMessage = "Welcome to ToDo CLI! \n   -------------------- \n";
+let introMessage = " \n--------------------\nWelcome to ToDo CLI! \n--------------------\n";
 
 console.log(introMessage);
 
 let options =
   "(v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n ";
 
-let toDoList = [["[ ]", "Take out the trash"], ["[ ]", "Buy toothpaste"], ["[ ]", "Buy Snickerdoodles"], ["[ ]", "Find a cure for aging"]];
+let toDoList = [["[ ]", "Take out the trash"]];
 
 
 
@@ -32,13 +32,11 @@ todoInterface.question(options, (answer) => {
       
       case answer[0] == "c":
       let cNumber = parseInt(answer[1]);
-      console.log("This is the cX item number:", cNumber);
       complete(cNumber);
       break;      
 
       case answer[0] == "d":
       let dNumber = parseInt(answer[1]);
-      console.log("This is the dX item number:", dNumber);
       toDelete(dNumber);
       break;
 
@@ -54,7 +52,15 @@ mainMenu(options);
 // functions 
 
 const view = function () {
-  console.log(toDoList);
+  
+ if (toDoList.length == 0) {
+   console.log("List is empty...")
+ }
+ else { 
+  for (let i = 0; i <= toDoList.length-1; i++) {
+  console.log(i+ " " + toDoList[i].join(" "));
+  }
+}
   console.log();
   mainMenu(options);
 };
@@ -64,20 +70,24 @@ const add = function () {
     console.log(toAdd);
     //view(toAdd);
     toDoList.push(["[ ]", toAdd]);
+    console.log();
     mainMenu(options);
   });
 };
 
 const complete = function (itemCompleted) {
   //update the box of index number's first index inside double array
-  toDoList[itemCompleted - 1][0] = "[✓]";
-  console.log(`Completed item: "${toDoList[itemCompleted - 1][1]}"`);
+  toDoList[itemCompleted][0] = "[✓]";
+  console.log(`Completed: "${toDoList[itemCompleted ][1]}"`);
+  console.log();
   mainMenu(options);
 };
 
 const toDelete = function (itemDeleted) {
-  console.log(`Deleted item: "${toDoList[itemDeleted - 1][1]}"`);
-  toDoList[itemDeleted - 1].splice(itemDeleted - 1, 1);
+  
+  console.log(`Deleted: "${toDoList[itemDeleted][1]}"`);
+  toDoList.splice(itemDeleted, 1);
+  console.log();
   mainMenu(options);
 };
 
@@ -85,6 +95,6 @@ const quit = function () {
  
   console.log("See you soon! 👀");
   todoInterface.close();
-  mainMenu(options);
+  process.exit();
 };
 
