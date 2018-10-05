@@ -1,3 +1,8 @@
+
+'use strict';
+
+const fs = require('fs');
+
 const readline = require('readline');
 
 const todoInterface = readline.createInterface({
@@ -6,12 +11,12 @@ const todoInterface = readline.createInterface({
 });
 
 // Example messages 
-let introMessage = " \n--------------------\nWelcome to ToDo CLI! \n--------------------\n";
+let introMessage = " \n----------------------------------------------------------------------\nWelcome to ToDo CLI! \n----------------------------------------------------------------------\n";
 
 console.log(introMessage);
 
 let options =
-  "(v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit \n ";
+  "(v) View • (n) New • (cX) Complete • (dX) Delete • (s) Save • (q) Quit \n";
 
 let toDoList = [["[ ]", "Take out the trash"]];
 
@@ -39,6 +44,11 @@ todoInterface.question(options, (answer) => {
       let dNumber = parseInt(answer[1]);
       toDelete(dNumber);
       break;
+
+      case answer == "s":
+      save();
+      break;
+
 
       case answer == "q":
       quit();
@@ -89,6 +99,38 @@ const toDelete = function (itemDeleted) {
   toDoList.splice(itemDeleted, 1);
   console.log();
   mainMenu(options);
+};
+
+const save = function () { 
+
+  todoInterface.question("What do you want to save? ", (toSave) => {
+    console.log(toSave);
+    
+
+      todoInterface.question("Where do you want to save it? (e.g. myTodos.json)", (whereSave) => {
+      
+     
+      if (whereSave == "") {
+        whereSave = "myTodos.json";
+      }
+      console.log(`Cool, list saved as "${whereSave}"`);
+    
+      let data = JSON.stringify(toDoList); 
+      fs.writeFileSync(whereSave, data);
+
+      console.log();
+      mainMenu(options);
+    
+    });
+  
+    
+    console.log();
+    mainMenu(options);
+  });
+
+ 
+
+
 };
 
 const quit = function () {
