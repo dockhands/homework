@@ -1,0 +1,54 @@
+<%- include("../partials/header") %>
+
+<div class="post-cards">
+    <div class="card mb-4">
+      <div class="card-body">
+      <img src= "<%= cohort.logoUrl %>" alt="..." class="img-rounded" height="50">
+        <h5 class="card-title">
+    
+    
+        <%= cohort.name%>
+    
+        </h5>
+       
+        <p class="card-text">
+        <%= cohort.members%>
+
+        <hr>
+
+        <h6>Method</h6>
+
+
+       
+
+        <form action="/show/<%= cohort.id %>" method="POST">
+        <div>
+          <input type="radio" id="teamCount"
+           name="teamMaker" value = "teamCount" >
+          <label for="teamCount">Team Count</label> <br>
+      
+          <input type="radio" id="memberCount"
+           name="teamMaker" value= "memberCount">
+          <label for="memberCount">Number Per Team</label> <br>
+      
+
+          <label for="quantity">Quantity</label> <br>
+          <input type="number" name="quantity"> <br>
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+
+      </div>
+
+      <form action="/cohorts/<%= cohort.id %>" method= "POST">
+      <input type="hidden" name ="_method" value="DELETE">
+      <input type="submit" value="Delete" class="btn btn-outline-danger">
+      </form>
+  
+    </div>
+
+</div>
+
+<%- include("../partials/footer") %>

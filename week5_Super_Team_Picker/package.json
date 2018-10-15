@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "db:create": "createdb --echo note_saver_dev",
-    "db:drop": "dropdb --echo note_saver_dev",
+    "db:create": "createdb --echo cohorts",
+    "db:drop": "dropdb --echo cohorts",
     "db:migrate": "knex migrate:latest",
     "db:reset": "npm run db:drop && npm run db:create && npm run db:migrate"
   },
@@ -19,6 +19,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "knex": "^0.15.2",
+    "method-override": "^3.0.0",
     "morgan": "^1.9.1",
     "pg": "^7.5.0"
   },
