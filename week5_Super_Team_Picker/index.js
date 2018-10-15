@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 
 
-
 // set the View Engine
 app.set("view engine", "ejs");
 

@@ -3,6 +3,10 @@ const router = express.Router();
 const knex = require("../db/client");
 
 
+
+let teamMethod = "";
+let quantity = "";
+
 // posts#new URL: /posts/new METHOD: GET
 // get the request URL cohorts/new then...
 router.get("/cohorts/new", (req, res) => {
@@ -48,6 +52,7 @@ router.post("/showCohort/:id", (req, res) => {
       .returning("*")
       .where("id", id)
       .then(cohorts => {
+      
        // res.redirect("/cohorts");
        res.redirect(`/cohorts/${cohorts[0].id}`);
 
@@ -59,12 +64,16 @@ router.post("/showCohort/:id", (req, res) => {
 router.get("/cohorts/:id", (req, res) => {
 
     const id = req.params.id;
-
+  
     knex("cohorts")
       .where("id", id)
       .first()
       .then(cohort => {
-  
+     
+
+
+      teamMethod = "",
+      quantity = "",
         //render the cohorots/show.ejs
         res.render("cohorts/show", {cohort:cohort});
       });
@@ -79,22 +88,19 @@ console.log("got inside delete");
   .where("id", id)
   .del()
   .then(() => {
+   
       res.redirect("/cohorts");
+
   });
-  
   });
 
 
-    
 // post Make Forms Team
 router.post("/show/:id", (request, response) => { 
   console.log("got inside make teams post");
   const id = request.params.id;
+  let names = [];
 
- // let quantity = request.body.quantity; 
- // let teamMethod = request.body.teamMaker;
-  // console.log("got inside make: ", teamMethod);
-  // console.log("got inside make: ", quantity);
   
   knex("cohorts")
       .returning("*")
@@ -102,17 +108,91 @@ router.post("/show/:id", (request, response) => {
       .then(cohorts => {
        // res.redirect("/cohorts");
        quantity = request.body.quantity,
-       teamMethod = request.body.teamMaker
-       response.redirect(`/cohorts/${cohorts[0].id}`); 
+       teamMethod = request.body.teamMaker,
+      //  names = cohort.members.split(","),
+       response.redirect(`/cohorts/${cohorts[0].id}/teams/?method=${teamMethod}&quantity=${quantity}`); 
   
-         console.log("got inside make: ", teamMethod);
+         console.log("team method = ", teamMethod);
          console.log("got inside make: ", quantity);
        });
-  
- 
-
     });
   
+    // cohorts#show URL: /cohorts/:id METHOD: GET
+router.get("/cohorts/:id/teams", (req, res) => {
+
+  const id = req.params.id;
+  method = req.query.method;
+  quantity = req.query.quantity;
+  console.log("team meth iszz ", method);
+  console.log("quantirty is  zzzz", quantity);
+
+  knex("cohorts")
+    .where("id", id)
+    .first()
+    .then(cohort => {
+
+      //render the cohorots/show.ejs
+      res.render("cohorts/teams", {cohort:cohort});
+      console.log("team meth iszz ", method);
+      console.log("quantirty is  zzzz", quantity);
+    });
+});
 
      
   module.exports = router;
+
+
+
+//   <% if (teamMethod === "memberCount") { %>
+//     <h2>Thanks you <%= teamMethod %> for taking survey</h2>
+//     <h2> <%= cohort.members%></h2>
+ 
+
+ 
+
+//     <h2> It seems like your quantity is <%= quantity %></h2>
+
+//     <table class="table">
+//     <thead>
+//       <tr>
+//         <th scope="col">#</th>
+//         <th scope="col">Members</th>
+//       </tr>
+//     </thead>
+//     <tbody>
+//       <tr>
+//         <th scope="row">1</th>
+//         <td>Mark</td>
+//         <td>Otto</td>
+//         <td>@mdo</td>
+//       </tr>
+     
+//   </tbody>
+//   </table>
+
+  
+//   <% } else if(teamMethod === "teamCount") { %>
+//   <h2>Thanks you <%= teamMethod %> for taking survey</h2>
+ 
+
+//   <h2> It seems like your quantity is <%= quantity %></h2>
+
+//   <table class="table">
+//   <thead>
+//     <tr>
+//       <th scope="col">#</th>
+//       <th scope="col">Members</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     <tr>
+//       <th scope="row">1</th>
+//       <td>Mark</td>
+//       <td>Otto</td>
+//       <td>@mdo</td>
+//     </tr>
+  
+//   </tbody>
+// </table>
+
+//   <% } %>
