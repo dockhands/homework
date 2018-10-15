@@ -91,23 +91,28 @@ router.post("/show/:id", (request, response) => {
   console.log("got inside make teams post");
   const id = request.params.id;
 
-  let quantity = request.body.quantity; 
-  let teamMethod = request.body.teamMaker;
-  console.log("got inside make: ", teamMethod);
-  console.log("got inside make: ", quantity);
+ // let quantity = request.body.quantity; 
+ // let teamMethod = request.body.teamMaker;
+  // console.log("got inside make: ", teamMethod);
+  // console.log("got inside make: ", quantity);
   
   knex("cohorts")
       .returning("*")
       .where("id", id)
       .then(cohorts => {
        // res.redirect("/cohorts");
+       quantity = request.body.quantity,
+       teamMethod = request.body.teamMaker
        response.redirect(`/cohorts/${cohorts[0].id}`); 
-      
+  
+         console.log("got inside make: ", teamMethod);
+         console.log("got inside make: ", quantity);
        });
-       console.log("got inside make .... teams ", teamMethod);
+  
  
 
     });
-   
+  
+
      
   module.exports = router;

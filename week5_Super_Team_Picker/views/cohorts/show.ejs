@@ -36,7 +36,7 @@
           <input type="number" name="quantity"> <br>
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit">Assign Teams</button>
         </div>
       </form>
 
@@ -48,6 +48,18 @@
       </form>
   
     </div>
+
+    <% if (teamMethod === "memberCount") { %>
+    <h2>Thanks you <%= teamMethod %> for taking survey</h2>
+    <h2> <%= cohort.members%></h2>
+    
+  <% } else if(teamMethod === "teamCount") { %>
+  <h2>Thanks you <%= teamMethod %> for taking survey</h2>
+  <h2> <%= cohort.members%></h2>
+  <% } %>
+
+ 
+    <h2> It seems like your quantity is <%= quantity %></h2>
 
 </div>
 
