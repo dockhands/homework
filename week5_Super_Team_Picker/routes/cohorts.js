@@ -5,7 +5,7 @@ const knex = require("../db/client");
 
 
 let teamMethod = "";
-let quantity = "";
+//let quantity = "";
 
 // posts#new URL: /posts/new METHOD: GET
 // get the request URL cohorts/new then...
@@ -126,6 +126,7 @@ router.get("/cohorts/:id/teams", (req, res) => {
   console.log("team meth iszz ", method);
   console.log("quantirty is  zzzz", quantity);
 
+
   knex("cohorts")
     .where("id", id)
     .first()
@@ -133,9 +134,7 @@ router.get("/cohorts/:id/teams", (req, res) => {
 
       //render the cohorots/show.ejs
       res.render("cohorts/teams", {cohort:cohort});
-      console.log("team meth iszz ", method);
-      console.log("quantirty is  zzzz", quantity);
-    });
+          });
 });
 
      

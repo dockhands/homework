@@ -49,7 +49,61 @@
    
     <h2>Thanks you <%= method %> for taking survey</h2>
 
+
+
+    <% if (method === "memberCount") { %>
+    <h2>Thanks you <%= method %> for taking survey</h2>
+    
  
+
+ 
+
+    <h2> It seems like your quantity is <%= quantity %></h2>
+
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Members</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+     
+  </tbody>
+  </table>
+
+  
+  <% } else if(method === "teamCount") { %>
+  <h2>Thanks you <%= method %> for taking survey</h2>
+ 
+
+  <h2> It seems like your quantity is <%= quantity %></h2>
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Members</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+  
+  </tbody>
+</table>
+
+  <% } %>
 
  
 
