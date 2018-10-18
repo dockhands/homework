@@ -47,18 +47,18 @@
     </div>
 
    
-    <h2>Thanks you <%= method %> for taking survey</h2>
+   
 
 
 
-    <% if (method === "memberCount") { %>
-    <h2>Thanks you <%= method %> for taking survey</h2>
+    <% if (method === "teamCount") { %>
+    <h2>You chose:  <%= method %></h2>
     
  
 
  
 
-    <h2> It seems like your quantity is <%= quantity %></h2>
+    <h2>Cool. You want to make  <%= quantity %> teams </h2>
 
     <table class="table">
     <thead>
@@ -79,11 +79,36 @@
   </table>
 
   
-  <% } else if(method === "teamCount") { %>
+  <% } else if(method === "memberCount") { %>
   <h2>Thanks you <%= method %> for taking survey</h2>
  
 
-  <h2> It seems like your quantity is <%= quantity %></h2>
+  <h2> Cool. You want each team to have <%= quantity %> people.</h2>
+<h4>Members are:  <%= cohort.members%></h4>
+
+<% let teamArray= cohort.members.split(",") %>
+<%= teamArray%>
+<%= teamArray[1]%>
+<h4><%= teamArray.length%></h4> <br>
+<h4><%= "Number of groups = ", (teamArray.length/quantity )%></h4>
+<h4><%=(teamArray.length)/parseInt(quantity) %></h4>
+<% let NumberOfGroups = (teamArray.length)/parseInt(quantity)%></h4>
+<% let  teamNumber = 1%>
+<% if( NumberOfGroups %quantity === 0) { %>
+<h5>We've got even number</h5>
+<% let teamNumber = NumberOfGroups %>
+<h5> Number of groups is =  <%= teamNumber%></h5>
+<% } else { %>
+<h5> Number is not even</h5>
+<% let teamNumber = Math.floor(NumberOfGroups)+1 %>
+<h5> Number of groups is =  <%= teamNumber%></h5>
+<% }%>
+
+
+
+
+
+ 
 
   <table class="table">
   <thead>
