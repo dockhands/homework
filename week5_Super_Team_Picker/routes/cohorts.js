@@ -123,14 +123,135 @@ router.get("/cohorts/:id/teams", (req, res) => {
   const id = req.params.id;
   method = req.query.method;
   quantity = req.query.quantity;
-  console.log("team meth iszz ", method);
-  console.log("quantirty is  zzzz", quantity);
+  console.log("========================================");
+
 
 
   knex("cohorts")
     .where("id", id)
     .first()
     .then(cohort => {
+
+
+      let membersArray = cohort.members.split(",")
+      let NumberOfMembers = membersArray.length;
+
+      //used below for our for loops
+      let rowArray = []; 
+      let teamArray = []
+      let memberArray = [];
+      //want to determine MembersPerTeam
+      // e.g. given 23 members, and 5 (quantity teams)
+      // return how many people in each team
+      if (method === "teamCount") { 
+          console.log("Method chosen: ", method)
+          console.log("So you want", quantity, "teams")
+          console.log("And you have a total of ",  NumberOfMembers, "members");
+          let  NumberOfTeams =  parseInt(quantity);
+          let MembersPerTeam =(NumberOfMembers)/NumberOfTeams;
+        
+          if( NumberOfMembers%NumberOfTeams === 0)  { 
+        
+            totalMembersPerTeam = MembersPerTeam;
+            console.log("total MembersPerTeam is ", totalMembersPerTeam );
+            console.log("So, make  ", NumberOfTeams, "rows" );
+            console.log("With ", totalMembersPerTeam, "in each row" );
+
+          
+            rowArray.length = NumberOfTeams;
+            memberArray.length = totalMembersPerTeam;
+
+            for (let i = 0; i<= rowArray.length; i++ ) {
+
+              teamArray[i] = membersArray.splice(0,totalMembersPerTeam) 
+            
+            }
+            console.log("Team array is ", teamArray)
+
+        } else { 
+          totalMembersPerTeam = Math.floor(MembersPerTeam)+1;
+          console.log("total MembersPerTeam is ", totalMembersPerTeam );
+          console.log("So, make  ", NumberOfTeams, "rows" );
+          console.log("With ", totalMembersPerTeam, "in each row" );
+
+  
+          rowArray.length = NumberOfTeams;
+          memberArray.length = totalMembersPerTeam;
+
+          for (let i = 0; i<= rowArray.length; i++ ) {
+
+            teamArray[i] = membersArray.splice(0,totalMembersPerTeam) 
+          
+          }
+          console.log("Team array is ", teamArray)
+        }
+    }
+
+    
+      //want to determine NumberOfTeams
+      // e.g. given 23 members, and 5 members per team,
+      // return how many teams should make
+      else if (method === "memberCount") {
+        console.log("Method chosen: ", method)
+        console.log("You have a total of ",  NumberOfMembers, "members");
+        console.log("And you wawnt each team to have", quantity, "people")
+        
+        let  MembersPerTeam = parseInt(quantity)
+
+        let Groups_all= ( NumberOfMembers)/MembersPerTeam
+        let  NumberOfTeams = 1;
+     
+        if( Groups_all%quantity === 0)  { 
+          NumberOfTeams = Groups_all;
+          console.log("So, make  ", NumberOfTeams, "rows" );
+          console.log("With ", MembersPerTeam, "in each row" );
+
+
+          rowArray.length = NumberOfTeams;
+          memberArray.length = MembersPerTeam;
+
+          for (let i = 0; i<= rowArray.length; i++ ) {
+
+            teamArray[i] = membersArray.splice(0,MembersPerTeam) 
+          
+          }
+          console.log("Team array is ", teamArray)
+
+
+        } else { 
+          console.log("is NOT even");
+          NumberOfTeams = Math.floor(Groups_all)+1;
+          console.log("So, make  ", NumberOfTeams, "rows" );
+          console.log("With ", MembersPerTeam, "in each row" );
+
+
+          rowArray.length = NumberOfTeams;
+          memberArray.length = MembersPerTeam;
+
+          for (let i = 0; i<= rowArray.length; i++ ) {
+
+            teamArray[i] = membersArray.splice(0,MembersPerTeam) 
+          
+          }
+          console.log("Team array is ", teamArray)
+
+        }
+      
+      console.log("NumberOfTeams is... ", NumberOfTeams);
+      } 
+
+      
+
+
+
+
+
+
+
+
+
+
+    
 
       //render the cohorots/show.ejs
       res.render("cohorts/teams", {cohort:cohort});

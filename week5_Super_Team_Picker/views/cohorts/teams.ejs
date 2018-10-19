@@ -1,6 +1,5 @@
 <%- include("../partials/header") %>
 
-
 <div class="post-cards">
     <div class="card mb-4">
       <div class="card-body">
@@ -79,36 +78,32 @@
   </table>
 
   
-  <% } else if(method === "memberCount") { %>
+<% } else if(method === "memberCount") { %>
   <h2>Thanks you <%= method %> for taking survey</h2>
  
 
-  <h2> Cool. You want each team to have <%= quantity %> people.</h2>
+<h2> Cool. You want each team to have <%= quantity %> people.</h2>
 <h4>Members are:  <%= cohort.members%></h4>
 
 <% let teamArray= cohort.members.split(",") %>
 <%= teamArray%>
-<%= teamArray[1]%>
+
 <h4><%= teamArray.length%></h4> <br>
-<h4><%= "Number of groups = ", (teamArray.length/quantity )%></h4>
-<h4><%=(teamArray.length)/parseInt(quantity) %></h4>
-<% let NumberOfGroups = (teamArray.length)/parseInt(quantity)%></h4>
-<% let  teamNumber = 1%>
-<% if( NumberOfGroups %quantity === 0) { %>
+
+
+<% let Groups_all= (teamArray.length)/parseInt(quantity)%></h4>
+<% let  NumberOfTeams = 0%>
+<% if( Groups_all %quantity === 0) { %>
 <h5>We've got even number</h5>
-<% let teamNumber = NumberOfGroups %>
-<h5> Number of groups is =  <%= teamNumber%></h5>
+<%  NumberOfTeams = Groups_all %>
+<%= Groups_all%></h4>
+<h5> Number of groups is =  <%= NumberOfTeams%></h5>
 <% } else { %>
 <h5> Number is not even</h5>
-<% let teamNumber = Math.floor(NumberOfGroups)+1 %>
-<h5> Number of groups is =  <%= teamNumber%></h5>
+<% NumberOfTeams = Math.floor(Groups_all)+1 %>
+<h5> Number of teams are =  <%= NumberOfTeams%></h5>
 <% }%>
 
-
-
-
-
- 
 
   <table class="table">
   <thead>
