@@ -29,104 +29,42 @@
       
 
           <label for="quantity">Quantity</label> <br>
-          <input type="number" name="quantity"> <br>
+          <input type="number" name="quantity" class="input-group"> <br>
         </div>
-        <div>
-          <button type="submit">Assign Teams</button>
+        <div> <br>
+          <button type="submit" class="btn btn-outline-primary btn-block p-4 ">Assign Teams</button>
         </div>
-      </form>
-
-      </div>
-
-      <form action="/cohorts/<%= cohort.id %>" method= "POST">
-      <input type="hidden" name ="_method" value="DELETE">
-      <input type="submit" value="Delete" class="btn btn-outline-danger">
-      </form>
   
     </div>
 
-   
-   
-
-
-
-    <% if (method === "teamCount") { %>
-    <h2>You chose:  <%= method %></h2>
-    
- 
-
- 
-
-    <h2>Cool. You want to make  <%= quantity %> teams </h2>
-
-    <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
+<div class="ml-4">
+        <table class="table">
+        <thead>
+        <tr>
+        <th scope="col">Team # </th>
         <th scope="col">Members</th>
+        </thead>
+        <tbody>
       </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-     
-  </tbody>
-  </table>
-
-  
-<% } else if(method === "memberCount") { %>
-  <h2>Thanks you <%= method %> for taking survey</h2>
- 
-
-<h2> Cool. You want each team to have <%= quantity %> people.</h2>
-<h4>Members are:  <%= cohort.members%></h4>
-
-<% let teamArray= cohort.members.split(",") %>
-<%= teamArray%>
-
-<h4><%= teamArray.length%></h4> <br>
-
-
-<% let Groups_all= (teamArray.length)/parseInt(quantity)%></h4>
-<% let  NumberOfTeams = 0%>
-<% if( Groups_all %quantity === 0) { %>
-<h5>We've got even number</h5>
-<%  NumberOfTeams = Groups_all %>
-<%= Groups_all%></h4>
-<h5> Number of groups is =  <%= NumberOfTeams%></h5>
-<% } else { %>
-<h5> Number is not even</h5>
-<% NumberOfTeams = Math.floor(Groups_all)+1 %>
-<h5> Number of teams are =  <%= NumberOfTeams%></h5>
-<% }%>
-
-
-  <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Members</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-  
-  </tbody>
-</table>
-
-  <% } %>
-
- 
-
-</div>
-
-<%- include("../partials/footer") %>
+    
+    
+        <%  for (let i = 0; i<= rowArray.length-1; i++ ) { %>
+        <tr>
+            <th scope="col">#<%=[i+1]%></th>
+            <th scope="row"> <%=teamArray[i]%></th>
+          </tr>
+         
+        
+          <% } %>
+    
+        
+      
+      </tbody>
+      </table>
+      </div>    
+    
+    
+    
+    </div>
+    
+    <%- include("../partials/footer") %>

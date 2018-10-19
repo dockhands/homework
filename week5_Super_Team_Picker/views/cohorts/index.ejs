@@ -17,6 +17,15 @@
         </h5>
         <form action="/showCohort/<%= cohort.id %>" method= "POST">
         <input type="submit" value="Show Cohort" class="btn btn-primary">
+
+        <input type="hidden" name ="_method" value="DELETE">
+        <input type="submit" value="Delete Cohort" class="btn btn-outline-danger ml-4 ">
+  
+        <a href="/cohorts/<%= cohort.id %>/edit" type="submit"class="btn btn-outline-primary m-2">  Edit Cohort</a>
+     
+      
+
+
         </form>
       </div>
     </div>
