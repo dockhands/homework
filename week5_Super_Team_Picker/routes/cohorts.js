@@ -24,6 +24,7 @@ router.post("/newCohort", (req, res) => {
       members: req.body.members,
       name: req.body.name,
       logoUrl: req.body.logoUrl
+      
 
     })
     .returning("*")
@@ -59,7 +60,6 @@ router.post("/showCohort/:id", (req, res) => {
     });
 });
 
-
 // cohorts#show URL: /cohorts/:id METHOD: GET
 router.get("/cohorts/:id", (req, res) => {
 
@@ -69,8 +69,6 @@ router.get("/cohorts/:id", (req, res) => {
     .where("id", id)
     .first()
     .then(cohort => {
-
-
 
       teamMethod = "",
         quantity = "",
@@ -94,8 +92,6 @@ router.post("/cohorts/:id", (req, res) => {
     });
 });
 
-
-
 // cohorts#edit URL: /cohorts/:id/edit METHOD: GET
 router.get("/cohorts/:id/edit", (req,res) => { 
 
@@ -108,8 +104,7 @@ router.get("/cohorts/:id/edit", (req,res) => {
   });
   });
 
-
-// post Make Forms Team
+// cohort Make Forms Team
 router.post("/show/:id", (request, response) => {
   console.log("got inside make teams post");
   const id = request.params.id;
@@ -126,10 +121,26 @@ router.post("/show/:id", (request, response) => {
         //  names = cohort.members.split(","),
         response.redirect(`/cohorts/${cohorts[0].id}/teams/?method=${teamMethod}&quantity=${quantity}`);
 
-      console.log("team method = ", teamMethod);
-      console.log("got inside make: ", quantity);
     });
 });
+
+
+// posts#update URL: /posts/:id METHOD: PATCH
+router.patch("/cohorts/:id", (req, res) => {
+  const id = req.params.id;
+
+  knex("cohorts")
+    .where("id", id)
+    .update({
+      members: req.body.members,
+      name: req.body.name,
+      logoUrl: req.body.logoUrl
+    })
+    .then(() => {
+      res.redirect(`/posts/${id}`);
+    });
+});
+
 
 // cohorts#show URL: /cohorts/:id METHOD: GET
 router.get("/cohorts/:id/teams", (req, res) => {
@@ -139,13 +150,10 @@ router.get("/cohorts/:id/teams", (req, res) => {
   quantity = req.query.quantity;
   console.log("========================================");
 
-
-
   knex("cohorts")
     .where("id", id)
     .first()
     .then(cohort => {
-
 
       let membersArray = cohort.members.split(",")
       let NumberOfMembers = membersArray.length;
@@ -165,7 +173,7 @@ router.get("/cohorts/:id/teams", (req, res) => {
         let MembersPerTeam = (NumberOfMembers) / NumberOfTeams;
 
         if (NumberOfMembers % NumberOfTeams === 0) {
-
+          console.log("Even steven");
           totalMembersPerTeam = MembersPerTeam;
           console.log("total MembersPerTeam is ", totalMembersPerTeam);
           console.log("So, make  ", NumberOfTeams, "rows");
@@ -185,16 +193,17 @@ router.get("/cohorts/:id/teams", (req, res) => {
     
 
         } else {
+          console.log("Odd todd");
           totalMembersPerTeam = Math.floor(MembersPerTeam) + 1;
           console.log("total MembersPerTeam is ", totalMembersPerTeam);
           console.log("So, make  ", NumberOfTeams, "rows");
           console.log("With ", totalMembersPerTeam, "in each row");
 
 
-          rowArray.length = NumberOfTeams;
+          rowArray.length = NumberOfTeams ;
           memberArray.length = totalMembersPerTeam;
 
-          for (let i = 0; i <= rowArray.length; i++) {
+          for (let i = 0; i < rowArray.length; i++) {
 
             teamArray[i] = membersArray.splice(0, totalMembersPerTeam)
 
@@ -258,13 +267,11 @@ router.get("/cohorts/:id/teams", (req, res) => {
         res.render("cohorts/teams", { cohort: cohort, teamArray, NumberOfTeams, rowArray });  
 
         }
-         
-       
+        
       }
     
     });
 });
-
 
 module.exports = router;
 
