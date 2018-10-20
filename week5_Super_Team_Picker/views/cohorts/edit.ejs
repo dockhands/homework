@@ -1,0 +1,38 @@
+<%- include("../partials/header") %>
+
+<h3>Edit your cohort📝</h3>
+
+<form action="/newCohort" method="POST">
+  <div class="form-group">
+  Logo Url <input
+      type="text"
+      class="form-control"
+      name= "logoUrl"
+      placeholder="e.g. www.cutedogs.com"
+      value= "<%= cohort.logoUrl %>">
+  </div>
+
+  <div class="form-group">
+  Team Name<input
+      type="text"
+      class="form-control"
+      name="name"
+      placeholder="Flying Ducks"
+      value= "<%= cohort.name %>"
+      >
+  </div>
+
+  <div class="form-group">
+  Members  <textarea
+      class="form-control"
+      name="members"
+      cols="200"
+      rows="5"
+      placeholder="Tam, Tan, Ted, Tron, etc"
+      > <%= cohort.members%> </textarea>
+  </div>
+
+  <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+
+<%- include("../partials/footer") %>
