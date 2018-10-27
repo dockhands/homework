@@ -1,0 +1,26 @@
+<h1> All Posts</h1>
+
+
+
+  <% @posts.each do |post| %>
+   
+   <ul>
+   <div class="post-cards">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">
+         <%= link_to(post.title, post_path(post.id)) %> 
+        </h5>
+       
+        <p class="card-text">
+         <%= post.body %>  
+        </p>
+    
+       
+
+           
+      <small>
+        Posted <%= time_ago_in_words(post.created_at) %> ago
+      </small>
+    </ul>
+  <% end %>
