@@ -1,0 +1,48 @@
+.container { 
+
+  margin: 0 auto;
+  background-color: #66ffff;
+  text-align: center;
+
+}
+
+.row { 
+  text-align: center;
+  background: lightcyan;
+  justify-content: center;
+}
+
+
+.square {
+  background: #fff;
+  width: 5vw;
+  height: 5vw;
+  border-style: solid;
+  margin: 5px;
+  text-align: center;
+  display: inline-block;
+  color: red;
+  border-radius: 10px;
+
+}
+.square h1 {
+  color: red;
+  display: inline-block;
+}
+
+.line {
+  border-bottom: 2px solid;
+  background: #fff;
+  width: 5vw;
+  height: 5vw;
+  margin: 5px;
+  text-align: center;
+  display: inline-block;
+}
+
+
+.selected, .selected h1 { 
+
+background: red;
+color: white;
+}
