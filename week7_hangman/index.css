@@ -1,0 +1,96 @@
+.container { 
+
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.jumbotron { 
+  background-color: rgb(255, 234, 209); 
+  }
+.jumbotron h1, h3 { 
+font-family: Georgia, serif;
+}
+
+.row { 
+  text-align: center;
+  
+  justify-content: center;
+}
+
+
+.square {
+  background: #fff;
+  width: 5vw;
+  height: 5vw;
+  border-style: solid;
+  margin: 3px;
+  text-align: center;
+  display: inline-block;
+  color: red;
+  border-radius: 10px;
+
+}
+.square h1 {
+  color: red;
+  display: inline-block;
+}
+
+.line {
+  border-bottom: 2px solid;
+  background: #fff;
+  width: 5vw;
+  height: 5vw;
+  margin: 5px;
+  text-align: center;
+  display: inline-block;
+  
+}
+
+#letter_1 h1{ 
+  visibility: hidden;
+}
+#letter_2 h1{ 
+  visibility: hidden;
+}
+#letter_3 h1{ 
+  visibility: hidden;
+}
+#letter_4 h1{ 
+  visibility: hidden;
+}
+#letter_5 h1{ 
+  visibility: hidden;
+}
+#letter_6 h1{ 
+  visibility: hidden;
+}
+#letter_7 h1{ 
+  visibility: hidden;
+}
+#letter_8 h1{ 
+  visibility: hidden;
+}
+
+.selected, .selected h1 { 
+
+background: red;
+color: white;
+}
+
+
+#gallows { background-image: url(./images/gallows.jpg); }
+
+.hangman {
+  width: 250px;
+  height: 300px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
