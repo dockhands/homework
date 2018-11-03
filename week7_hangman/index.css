@@ -8,8 +8,10 @@
 }
 
 .jumbotron { 
-
- height: 50px;
+  background-color: rgb(255, 234, 209); 
+  }
+.jumbotron h1, h3 { 
+font-family: Georgia, serif;
 }
 
 .row { 
@@ -80,9 +82,6 @@ color: white;
 
 
 #gallows { background-image: url(./images/gallows.jpg); }
-
-
-
 
 .hangman {
   width: 250px;
